@@ -17,7 +17,7 @@ package org.apache.shiro.spring.boot.jwt;
 
 import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
 
-import io.github.hiwepy.jwt.JwtPayload;
+import io.github.easy4j.jwt.JwtPayload;
 
 /**
  * TODO
