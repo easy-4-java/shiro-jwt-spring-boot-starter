@@ -27,7 +27,7 @@ import io.github.easy4j.jwt.JwtPayload;
 
 /**
  * Abstract JSON Web Token (JWT) Payload Repository
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public interface JwtPayloadRepository {
 
