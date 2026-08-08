@@ -31,7 +31,7 @@ import com.alibaba.fastjson2.JSONObject;
 /**
  * Jwt授权 (authorization)过滤器
  *
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class JwtAuthorizationFilter extends AbstracAuthorizationFilter {
 
