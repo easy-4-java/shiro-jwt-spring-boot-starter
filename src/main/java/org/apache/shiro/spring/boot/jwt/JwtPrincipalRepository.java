@@ -26,7 +26,7 @@ import io.github.easy4j.jwt.JwtPayload;
 
 /**
  * JSON Web Token (JWT) Principal Repository
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class JwtPrincipalRepository extends ShiroPrincipalRepositoryImpl {
 
