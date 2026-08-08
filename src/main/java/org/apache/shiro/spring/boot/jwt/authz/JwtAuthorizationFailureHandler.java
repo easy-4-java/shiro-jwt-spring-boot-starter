@@ -18,8 +18,8 @@ package org.apache.shiro.spring.boot.jwt.authz;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import com.alibaba.fastjson2.JSON;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -45,7 +45,7 @@ import com.alibaba.fastjson2.JSONObject;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandler {
 
