@@ -28,7 +28,7 @@ import org.springframework.util.CollectionUtils;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class SubjectJwtUtils extends SubjectUtils {
 	

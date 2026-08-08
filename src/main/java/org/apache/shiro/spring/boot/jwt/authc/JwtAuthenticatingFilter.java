@@ -18,10 +18,10 @@ package org.apache.shiro.spring.boot.jwt.authc;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson2.JSON;
 import org.apache.shiro.authc.AuthenticationException;
@@ -46,7 +46,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Jwt认证 (authentication)过滤器
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class JwtAuthenticatingFilter extends TrustableRestAuthenticatingFilter {
 

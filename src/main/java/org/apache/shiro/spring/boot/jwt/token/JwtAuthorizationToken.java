@@ -19,7 +19,7 @@ import org.apache.shiro.authc.HostAuthenticationToken;
 
 /**
  * JSON Web Token (JWT) Token
- * @author 		： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @SuppressWarnings("serial")
 public class JwtAuthorizationToken implements HostAuthenticationToken {
