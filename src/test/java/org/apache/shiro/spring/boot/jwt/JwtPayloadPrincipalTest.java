@@ -15,25 +15,24 @@
  */
 package org.apache.shiro.spring.boot.jwt;
 
-import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import io.github.easy4j.jwt.JwtPayload;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * TODO
+ * Unit tests for {{ @link JwtPayloadPrincipal }}.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
-@SuppressWarnings("serial")
-public class JwtPayloadPrincipal extends ShiroPrincipal {
+@DisplayName("JwtPayloadPrincipal Tests")
+class JwtPayloadPrincipalTest {
 
-	private final JwtPayload payload;
-	
-	public JwtPayloadPrincipal(JwtPayload payload) {
-		this.payload = payload;
-	}
-
-	public JwtPayload getPayload() {
-		return payload;
-	}
-	
+    @Test
+    @DisplayName("Instance can be created via constructor")
+    void testInstantiation() {
+        JwtPayloadPrincipal instance = new JwtPayloadPrincipal(null);
+        assertThat(instance).isNotNull();
+    }
 }

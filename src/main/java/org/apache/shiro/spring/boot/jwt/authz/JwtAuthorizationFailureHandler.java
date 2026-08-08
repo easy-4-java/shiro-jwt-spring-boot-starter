@@ -45,7 +45,7 @@ import com.alibaba.fastjson2.JSONObject;
 
 /**
  * TODO
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandler {
 
