@@ -13,27 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.apache.shiro.spring.boot.jwt;
+package org.apache.shiro.spring.boot;
 
-import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-import io.github.easy4j.jwt.JwtPayload;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * TODO
+ * Unit tests for {{ @link ShiroJwtWebFilterConfiguration }}.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
-@SuppressWarnings("serial")
-public class JwtPayloadPrincipal extends ShiroPrincipal {
+@DisplayName("ShiroJwtWebFilterConfiguration Tests")
+class ShiroJwtWebFilterConfigurationTest {
 
-	private final JwtPayload payload;
-	
-	public JwtPayloadPrincipal(JwtPayload payload) {
-		this.payload = payload;
-	}
-
-	public JwtPayload getPayload() {
-		return payload;
-	}
-	
+    @Test
+    @DisplayName("Instance can be created via constructor")
+    void testInstantiation() {
+        ShiroJwtWebFilterConfiguration instance = new ShiroJwtWebFilterConfiguration();
+        assertThat(instance).isNotNull();
+    }
 }
