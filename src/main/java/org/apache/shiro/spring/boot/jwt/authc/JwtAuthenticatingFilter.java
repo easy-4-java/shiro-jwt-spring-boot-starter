@@ -46,7 +46,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Jwt认证 (authentication)过滤器
- * @author ： <a href="https://github.com/hiwepy">hiwepy</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 public class JwtAuthenticatingFilter extends TrustableRestAuthenticatingFilter {
 
