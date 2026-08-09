@@ -21,6 +21,9 @@ import com.google.common.collect.Sets;
 public class JwtStatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 
 	@Override
+	/** Returns the authentication token class.
+	 * @return the result
+	 */
 	public Class<?> getAuthenticationTokenClass() {
 		return JwtAuthorizationToken.class;// 此Realm只支持JwtToken
 	}

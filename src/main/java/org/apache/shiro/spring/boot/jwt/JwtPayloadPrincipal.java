@@ -32,6 +32,9 @@ public class JwtPayloadPrincipal extends ShiroPrincipal {
 		this.payload = payload;
 	}
 
+	/** Returns the payload.
+	 * @return the result
+	 */
 	public JwtPayload getPayload() {
 		return payload;
 	}

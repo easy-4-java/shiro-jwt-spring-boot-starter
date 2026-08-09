@@ -14,6 +14,11 @@
  * the License.
  */
 package org.apache.shiro.spring.boot.utils;
+/** The String Utils.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 public class StringUtils extends org.apache.shiro.util.StringUtils{
 

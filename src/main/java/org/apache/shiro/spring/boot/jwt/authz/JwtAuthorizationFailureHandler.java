@@ -53,6 +53,10 @@ public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandl
 	private static final Logger LOG = LoggerFactory.getLogger(JwtAuthenticationFailureHandler.class);
 	
 	@Override
+	/** Indicates whether this provider supports the given authentication class.
+	 * @param ex the ex
+	 * @return the result
+	 */
 	public boolean supports(AuthenticationException ex) {
 		return SubjectUtils.isAssignableFrom(ex.getClass(), ExpiredJwtException.class,
 				IncorrectJwtException.class, InvalidJwtToken.class, NotObtainedJwtException.class);
@@ -104,6 +108,9 @@ public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandl
 	}
 	
 	@Override
+	/** Returns the order.
+	 * @return the result
+	 */
 	public int getOrder() {
 		return Integer.MAX_VALUE - 1;
 	}

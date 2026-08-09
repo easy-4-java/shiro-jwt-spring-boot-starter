@@ -22,7 +22,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 
 /**
- * 扩展自StatelessDefaultSubjectFactory,对于无状态的JSON Web Token (JWT)不创建session
+ * StatelessDefaultSubjectFactory, JSON Web Token (JWT)session
  */
 public class JwtSubjectFactory extends SessionCreationEnabledSubjectFactory {
 

@@ -10,6 +10,9 @@ import org.apache.shiro.spring.boot.jwt.token.JwtAuthorizationToken;
 public class JwtStatefulAuthorizingRealm extends AbstractAuthorizingRealm {
 
 	@Override
+	/** Returns the authentication token class.
+	 * @return the result
+	 */
 	public Class<?> getAuthenticationTokenClass() {
 		return JwtAuthorizationToken.class;// 此Realm只支持JwtToken
 	}

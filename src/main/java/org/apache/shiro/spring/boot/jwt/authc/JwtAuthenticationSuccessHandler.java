@@ -37,6 +37,11 @@ import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 
 import com.alibaba.fastjson2.JSONObject;
+/** Authentication success handler for Jwt.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 
 public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHandler, Ordered {
@@ -55,11 +60,21 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
 	}
 
 	@Override
+	/** Indicates whether this provider supports the given authentication class.
+	 * @param token the token
+	 * @return the result
+	 */
 	public boolean supports(AuthenticationToken token) {
 		return SubjectUtils.isAssignableFrom(token.getClass(), JwtAuthenticationToken.class);
 	}
 
 	@Override
+	/** Called when an authentication attempt succeeds.
+	 * @param token the token
+	 * @param request the request
+	 * @param response the response
+	 * @param subject the subject
+	 */
 	public void onAuthenticationSuccess(AuthenticationToken token, ServletRequest request, ServletResponse response,
 			Subject subject) {
 
@@ -86,22 +101,37 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
 	}
 
 	@Override
+	/** Returns the order.
+	 * @return the result
+	 */
 	public int getOrder() {
 		return Integer.MAX_VALUE - 1;
 	}
 
+	/** Returns the jwt payload repository.
+	 * @return the result
+	 */
 	public JwtPayloadRepository getJwtPayloadRepository() {
 		return jwtPayloadRepository;
 	}
 
+	/** Sets the jwt payload repository.
+	 * @param jwtPayloadRepository the jwtPayloadRepository
+	 */
 	public void setJwtPayloadRepository(JwtPayloadRepository jwtPayloadRepository) {
 		this.jwtPayloadRepository = jwtPayloadRepository;
 	}
 
+	/** Returns whether the check expiry is enabled.
+	 * @return the result
+	 */
 	public boolean isCheckExpiry() {
 		return checkExpiry;
 	}
 
+	/** Sets the check expiry.
+	 * @param checkExpiry the checkExpiry
+	 */
 	public void setCheckExpiry(boolean checkExpiry) {
 		this.checkExpiry = checkExpiry;
 	}

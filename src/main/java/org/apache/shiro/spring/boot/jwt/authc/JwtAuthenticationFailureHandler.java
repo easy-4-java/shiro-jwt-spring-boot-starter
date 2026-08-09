@@ -44,6 +44,11 @@ import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 
 import com.alibaba.fastjson2.JSONObject;
+/** Matched authentication failure handler for Jwt Authentication Failure Handler authentication.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 public class JwtAuthenticationFailureHandler implements AuthenticationFailureHandler, Ordered {
 
@@ -51,12 +56,22 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 	private static final Logger LOG = LoggerFactory.getLogger(JwtAuthenticationFailureHandler.class);
 
 	@Override
+	/** Indicates whether this provider supports the given authentication class.
+	 * @param ex the ex
+	 * @return the result
+	 */
 	public boolean supports(AuthenticationException ex) {
 		return SubjectUtils.isAssignableFrom(ex.getClass(), ExpiredJwtException.class,
 				IncorrectJwtException.class, InvalidJwtToken.class, NotObtainedJwtException.class);
 	}
 
 	@Override
+	/** Called when an authentication attempt fails.
+	 * @param token the token
+	 * @param request the request
+	 * @param response the response
+	 * @param ex the ex
+	 */
 	public void onAuthenticationFailure(AuthenticationToken token, ServletRequest request, ServletResponse response,
 			AuthenticationException ex) {
 
@@ -102,6 +117,9 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 	}
 
 	@Override
+	/** Returns the order.
+	 * @return the result
+	 */
 	public int getOrder() {
 		return Integer.MAX_VALUE - 1;
 	}

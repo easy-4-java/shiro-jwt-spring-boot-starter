@@ -41,6 +41,10 @@ public class JwtPrincipalRepository extends ShiroPrincipalRepositoryImpl {
     }
 
 	@Override
+	/** Returns the authentication info.
+	 * @param token the token
+	 * @return the result
+	 */
 	public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
 		JwtAuthorizationToken jwtToken = (JwtAuthorizationToken) token;
@@ -63,14 +67,23 @@ public class JwtPrincipalRepository extends ShiroPrincipalRepositoryImpl {
 		return new SimpleAuthenticationInfo(principal, jwtToken.getCredentials(), "JWT");
 	}
 
+	/** Returns the jwt payload repository.
+	 * @return the result
+	 */
 	public JwtPayloadRepository getJwtPayloadRepository() {
 		return jwtPayloadRepository;
 	}
 
+	/** Returns whether the check expiry is enabled.
+	 * @return the result
+	 */
 	public boolean isCheckExpiry() {
 		return checkExpiry;
 	}
 
+	/** Sets the check expiry.
+	 * @param checkExpiry the checkExpiry
+	 */
 	public void setCheckExpiry(boolean checkExpiry) {
 		this.checkExpiry = checkExpiry;
 	}

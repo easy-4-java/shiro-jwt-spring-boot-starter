@@ -29,7 +29,7 @@ import org.springframework.http.MediaType;
 import com.alibaba.fastjson2.JSONObject;
 
 /**
- * Jwt授权 (authorization)过滤器
+ * Jwtauthorization (authorization)filter
  *
  * @author [@Loong Wan](https://github.com/loong10k)
  */
@@ -53,6 +53,12 @@ public class JwtAuthorizationFilter extends AbstracAuthorizationFilter {
 	private boolean checkExpiry = false;
 
 	@Override
+	/** Returns whether the access allowed is enabled.
+	 * @param request the request
+	 * @param response the response
+	 * @param mappedValue the mappedValue
+	 * @return the result
+	 */
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)
 			throws Exception {
 		// 判断是否认证请求
@@ -102,11 +108,20 @@ public class JwtAuthorizationFilter extends AbstracAuthorizationFilter {
 		return new JwtAuthorizationToken(host, jwtToken, false);
 	}
 
+    /** Returns whether the jwt submission is enabled.
+     * @param request the request
+     * @param response the response
+     * @return the result
+     */
     protected boolean isJwtSubmission(ServletRequest request, ServletResponse response) {
     	 String authzHeader = getAccessToken(request);
 		return (request instanceof HttpServletRequest) && authzHeader != null;
 	}
 
+    /** Returns the access token.
+     * @param request the request
+     * @return the result
+     */
     protected String getAccessToken(ServletRequest request) {
 
     	HttpServletRequest httpRequest = WebUtils.toHttp(request);
@@ -132,42 +147,72 @@ public class JwtAuthorizationFilter extends AbstracAuthorizationFilter {
         return token;
     }
 
+    /** Returns the authorization header name.
+     * @return the result
+     */
     public String getAuthorizationHeaderName() {
 		return authorizationHeaderName;
 	}
 
+	/** Sets the authorization header name.
+	 * @param authorizationHeaderName the authorizationHeaderName
+	 */
 	public void setAuthorizationHeaderName(String authorizationHeaderName) {
 		this.authorizationHeaderName = authorizationHeaderName;
 	}
 
+	/** Returns the authorization param name.
+	 * @return the result
+	 */
 	public String getAuthorizationParamName() {
 		return authorizationParamName;
 	}
 
+	/** Sets the authorization param name.
+	 * @param authorizationParamName the authorizationParamName
+	 */
 	public void setAuthorizationParamName(String authorizationParamName) {
 		this.authorizationParamName = authorizationParamName;
 	}
 
+	/** Returns the authorization cookie name.
+	 * @return the result
+	 */
 	public String getAuthorizationCookieName() {
 		return authorizationCookieName;
 	}
 
+	/** Sets the authorization cookie name.
+	 * @param authorizationCookieName the authorizationCookieName
+	 */
 	public void setAuthorizationCookieName(String authorizationCookieName) {
 		this.authorizationCookieName = authorizationCookieName;
 	}
 
+	/** Returns the jwt payload repository.
+	 * @return the result
+	 */
 	public JwtPayloadRepository getJwtPayloadRepository() {
 		return jwtPayloadRepository;
 	}
 
+	/** Sets the jwt payload repository.
+	 * @param jwtPayloadRepository the jwtPayloadRepository
+	 */
 	public void setJwtPayloadRepository(JwtPayloadRepository jwtPayloadRepository) {
 		this.jwtPayloadRepository = jwtPayloadRepository;
 	}
 
+	/** Returns whether the check expiry is enabled.
+	 * @return the result
+	 */
 	public boolean isCheckExpiry() {
 		return checkExpiry;
 	}
 
+	/** Sets the check expiry.
+	 * @param checkExpiry the checkExpiry
+	 */
 	public void setCheckExpiry(boolean checkExpiry) {
 		this.checkExpiry = checkExpiry;
 	}

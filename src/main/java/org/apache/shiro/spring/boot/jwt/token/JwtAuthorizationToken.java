@@ -38,24 +38,39 @@ public class JwtAuthorizationToken implements HostAuthenticationToken {
 	}
 
 	@Override
+	/** Returns the principal.
+	 * @return the result
+	 */
 	public Object getPrincipal() {
 		return this.token;
 	}
 
 	@Override
+	/** Returns the credentials.
+	 * @return the result
+	 */
 	public Object getCredentials() {
 		return this.token;
 	}
 
 	@Override
+	/** Returns the host.
+	 * @return the result
+	 */
 	public String getHost() {
 		return host;
 	}
 
+	/** Returns the token.
+	 * @return the result
+	 */
 	public String getToken() {
 		return token;
 	}
 
+	/** Returns whether the remember me is enabled.
+	 * @return the result
+	 */
 	public boolean isRememberMe() {
 		return isRememberMe;
 	}

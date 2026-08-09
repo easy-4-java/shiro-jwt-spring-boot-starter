@@ -17,6 +17,11 @@ package org.apache.shiro.spring.boot;
 
 import org.apache.shiro.spring.boot.jwt.token.JwtAuthorizationToken;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+/** Configuration properties for Shiro Jwt.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 
 @ConfigurationProperties(ShiroJwtProperties.PREFIX)
 public class ShiroJwtProperties {
@@ -79,66 +84,114 @@ public class ShiroJwtProperties {
 
 	private Long refresh_token_expiration;
 
+	/** Returns whether the enabled is enabled.
+	 * @return the result
+	 */
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+	/** Sets the enabled.
+	 * @param enabled the enabled
+	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
+	/** Returns whether the check expiry is enabled.
+	 * @return the result
+	 */
 	public boolean isCheckExpiry() {
 		return checkExpiry;
 	}
 
+	/** Sets the check expiry.
+	 * @param checkExpiry the checkExpiry
+	 */
 	public void setCheckExpiry(boolean checkExpiry) {
 		this.checkExpiry = checkExpiry;
 	}
 
+	/** Returns the token expiration time.
+	 * @return the result
+	 */
 	public Long getTokenExpirationTime() {
 		return tokenExpirationTime;
 	}
 
+	/** Sets the token expiration time.
+	 * @param tokenExpirationTime the tokenExpirationTime
+	 */
 	public void setTokenExpirationTime(Long tokenExpirationTime) {
 		this.tokenExpirationTime = tokenExpirationTime;
 	}
 
+	/** Returns the token issuer.
+	 * @return the result
+	 */
 	public String getTokenIssuer() {
 		return tokenIssuer;
 	}
 
+	/** Sets the token issuer.
+	 * @param tokenIssuer the tokenIssuer
+	 */
 	public void setTokenIssuer(String tokenIssuer) {
 		this.tokenIssuer = tokenIssuer;
 	}
 
+	/** Returns the token signing key.
+	 * @return the result
+	 */
 	public String getTokenSigningKey() {
 		return tokenSigningKey;
 	}
 
+	/** Sets the token signing key.
+	 * @param tokenSigningKey the tokenSigningKey
+	 */
 	public void setTokenSigningKey(String tokenSigningKey) {
 		this.tokenSigningKey = tokenSigningKey;
 	}
 
+	/** Returns the refresh token exp time.
+	 * @return the result
+	 */
 	public Integer getRefreshTokenExpTime() {
 		return refreshTokenExpTime;
 	}
 
+	/** Sets the refresh token exp time.
+	 * @param refreshTokenExpTime the refreshTokenExpTime
+	 */
 	public void setRefreshTokenExpTime(Integer refreshTokenExpTime) {
 		this.refreshTokenExpTime = refreshTokenExpTime;
 	}
 
+	/** Returns the access_token_expiration.
+	 * @return the result
+	 */
 	public Long getAccess_token_expiration() {
 		return access_token_expiration;
 	}
 
+	/** Sets the access_token_expiration.
+	 * @param access_token_expiration the access_token_expiration
+	 */
 	public void setAccess_token_expiration(Long access_token_expiration) {
 		this.access_token_expiration = access_token_expiration;
 	}
 
+	/** Returns the refresh_token_expiration.
+	 * @return the result
+	 */
 	public Long getRefresh_token_expiration() {
 		return refresh_token_expiration;
 	}
 
+	/** Sets the refresh_token_expiration.
+	 * @param refresh_token_expiration the refresh_token_expiration
+	 */
 	public void setRefresh_token_expiration(Long refresh_token_expiration) {
 		this.refresh_token_expiration = refresh_token_expiration;
 	}

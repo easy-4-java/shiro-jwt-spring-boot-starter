@@ -23,6 +23,11 @@ import org.springframework.context.annotation.Configuration;
 	"org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration",  // shiro-spring-boot-web-starter
 	"org.apache.shiro.spring.boot.ShiroBizWebAutoConfiguration" // shiro-biz-spring-boot-starter
 })
+/** Auto-configuration for Shiro Jwt Web.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @ConditionalOnProperty(prefix = ShiroJwtProperties.PREFIX, value = "enabled", havingValue = "true")
 @EnableConfigurationProperties({ ShiroBizProperties.class, ShiroJwtProperties.class })
 public class ShiroJwtWebAutoConfiguration extends AbstractShiroWebConfiguration implements ApplicationContextAware {
@@ -60,10 +65,16 @@ public class ShiroJwtWebAutoConfiguration extends AbstractShiroWebConfiguration 
 	}
 
 	@Override
+	/** Sets the application context.
+	 * @param applicationContext the applicationContext
+	 */
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}
 
+	/** Returns the application context.
+	 * @return the result
+	 */
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
 	}
