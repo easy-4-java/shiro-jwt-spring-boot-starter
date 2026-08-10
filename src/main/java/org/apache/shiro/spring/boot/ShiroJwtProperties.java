@@ -19,7 +19,7 @@ import org.apache.shiro.spring.boot.jwt.token.JwtAuthorizationToken;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 /** Configuration properties for Shiro Jwt.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 

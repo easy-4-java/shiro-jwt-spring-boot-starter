@@ -3,6 +3,7 @@ package org.apache.shiro.spring.boot.jwt.realm;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.biz.realm.AbstractAuthorizingRealm;
@@ -16,7 +17,7 @@ import com.google.common.collect.Sets;
 
 /**
  * JSON Web Token (JWT) Stateless AuthorizingRealm
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class JwtStatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 
@@ -24,7 +25,7 @@ public class JwtStatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 	/** Returns the authentication token class.
 	 * @return the result
 	 */
-	public Class<?> getAuthenticationTokenClass() {
+	public Class<? extends AuthenticationToken> getAuthenticationTokenClass() {
 		return JwtAuthorizationToken.class;// 此Realm只支持JwtToken
 	}
 

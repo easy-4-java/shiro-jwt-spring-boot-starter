@@ -21,15 +21,15 @@ import java.nio.charset.StandardCharsets;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 import com.alibaba.fastjson2.JSON;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.biz.authc.AuthcResponse;
 import org.apache.shiro.biz.authc.AuthcResponseCode;
-import org.apache.shiro.biz.authc.AuthenticationFailureHandler;
 import org.apache.shiro.biz.utils.SubjectUtils;
-import org.apache.shiro.biz.utils.WebUtils;
 import org.apache.shiro.biz.web.servlet.http.HttpStatus;
 import org.apache.shiro.spring.boot.jwt.ShiroJwtMessageSource;
 import org.apache.shiro.spring.boot.jwt.exception.ExpiredJwtException;
@@ -46,16 +46,15 @@ import org.springframework.http.MediaType;
 import com.alibaba.fastjson2.JSONObject;
 /** Matched authentication failure handler for Jwt Authentication Failure Handler authentication.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 
-public class JwtAuthenticationFailureHandler implements AuthenticationFailureHandler, Ordered {
+public class JwtAuthenticationFailureHandler implements Ordered {
 
 	protected MessageSourceAccessor messages = ShiroJwtMessageSource.getAccessor();
 	private static final Logger LOG = LoggerFactory.getLogger(JwtAuthenticationFailureHandler.class);
 
-	@Override
 	/** Indicates whether this provider supports the given authentication class.
 	 * @param ex the ex
 	 * @return the result
@@ -65,7 +64,6 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 				IncorrectJwtException.class, InvalidJwtToken.class, NotObtainedJwtException.class);
 	}
 
-	@Override
 	/** Called when an authentication attempt fails.
 	 * @param token the token
 	 * @param request the request
@@ -81,7 +79,7 @@ public class JwtAuthenticationFailureHandler implements AuthenticationFailureHan
 
 		try {
 
-			WebUtils.toHttp(response).setStatus(HttpStatus.SC_OK);
+			((HttpServletResponse) response).setStatus(HttpStatus.SC_OK);
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
 

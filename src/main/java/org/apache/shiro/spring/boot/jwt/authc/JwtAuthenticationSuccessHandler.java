@@ -21,13 +21,12 @@ import java.util.Map;
 
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson2.JSON;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.biz.authc.AuthenticationSuccessHandler;
 import org.apache.shiro.biz.authz.principal.ShiroPrincipal;
 import org.apache.shiro.biz.utils.SubjectUtils;
-import org.apache.shiro.biz.utils.WebUtils;
 import org.apache.shiro.biz.web.servlet.http.HttpStatus;
 import org.apache.shiro.spring.boot.jwt.JwtPayloadRepository;
 import org.apache.shiro.spring.boot.jwt.token.JwtAuthenticationToken;
@@ -39,12 +38,12 @@ import org.springframework.http.MediaType;
 import com.alibaba.fastjson2.JSONObject;
 /** Authentication success handler for Jwt.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 
 
-public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHandler, Ordered {
+public class JwtAuthenticationSuccessHandler implements Ordered {
 
 	private JwtPayloadRepository jwtPayloadRepository;
 	/** If Check JWT Validity. */
@@ -59,7 +58,6 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
 		this.checkExpiry = checkExpiry;
 	}
 
-	@Override
 	/** Indicates whether this provider supports the given authentication class.
 	 * @param token the token
 	 * @return the result
@@ -68,7 +66,6 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
 		return SubjectUtils.isAssignableFrom(token.getClass(), JwtAuthenticationToken.class);
 	}
 
-	@Override
 	/** Called when an authentication attempt succeeds.
 	 * @param token the token
 	 * @param request the request
@@ -89,7 +86,8 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
 
 			Map<String, Object> tokenMap = SubjectJwtUtils.tokenMap(subject, tokenString);
 
-			WebUtils.toHttp(response).setStatus(HttpStatus.SC_OK);
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.setStatus(HttpStatus.SC_OK);
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
 			JSON.writeTo(response.getOutputStream(), tokenMap);

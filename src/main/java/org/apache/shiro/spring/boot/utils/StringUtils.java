@@ -14,22 +14,44 @@
  * the License.
  */
 package org.apache.shiro.spring.boot.utils;
+
+import java.util.StringTokenizer;
 /** The String Utils.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
-
-public class StringUtils extends org.apache.shiro.util.StringUtils{
+public final class StringUtils {
 
 	/**
 	 * Any number of these characters are considered delimiters between multiple
 	 * context config paths in a single String value.
 	 */
-	public static String CONFIG_LOCATION_DELIMITERS = ",; \t\n";
-	
+	public static final String CONFIG_LOCATION_DELIMITERS = ",; \t\n";
+
+	private StringUtils() {
+		// utility class
+	}
+
+	public static boolean isEmpty(Object o) {
+		return o == null || "".equals(o);
+	}
+
 	public static String[] tokenizeToStringArray(String str) {
 		return tokenizeToStringArray(str, CONFIG_LOCATION_DELIMITERS);
 	}
-	
+
+	public static String[] tokenizeToStringArray(String str, String delimiters) {
+		if (str == null) {
+			return new String[0];
+		}
+		StringTokenizer st = new StringTokenizer(str, delimiters);
+		String[] tokens = new String[st.countTokens()];
+		int i = 0;
+		while (st.hasMoreTokens()) {
+			tokens[i++] = st.nextToken();
+		}
+		return tokens;
+	}
+
 }

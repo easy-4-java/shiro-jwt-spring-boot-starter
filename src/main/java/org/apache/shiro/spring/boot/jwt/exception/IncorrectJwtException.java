@@ -3,7 +3,7 @@ package org.apache.shiro.spring.boot.jwt.exception;
 import org.apache.shiro.authc.AuthenticationException;
 /** Exception thrown when a Incorrect Jwt error occurs.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 

@@ -18,7 +18,7 @@ package org.apache.shiro.spring.boot.utils;
 import com.alibaba.fastjson2.JSONObject;
 /** The J S O N Result.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 

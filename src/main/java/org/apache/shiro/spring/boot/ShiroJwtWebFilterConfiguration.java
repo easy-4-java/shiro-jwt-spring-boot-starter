@@ -1,12 +1,11 @@
 package org.apache.shiro.spring.boot;
 
-import org.apache.shiro.biz.spring.ShiroFilterProxyFactoryBean;
-import org.apache.shiro.spring.boot.biz.ShiroBizFilterFactoryBean;
-import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.spring.web.config.AbstractShiroWebFilterConfiguration;
-import org.apache.shiro.web.servlet.AbstractShiroFilter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.apache.shiro.spring.boot.jwt.JwtPayloadRepository;
+import org.apache.shiro.spring.boot.jwt.JwtPrincipalRepository;
+import org.apache.shiro.spring.boot.jwt.authc.JwtAuthenticatingFilter;
+import org.apache.shiro.spring.boot.jwt.authc.JwtAuthenticationFailureHandler;
+import org.apache.shiro.spring.boot.jwt.authc.JwtAuthenticationSuccessHandler;
+import org.apache.shiro.spring.boot.jwt.authz.JwtAuthorizationFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,53 +15,49 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@AutoConfigureBefore( name = {
-	"org.apache.shiro.spring.config.web.autoconfigure.ShiroWebFilterConfiguration",  // shiro-spring-boot-web-starter
-	"org.apache.shiro.spring.boot.ShiroBizWebFilterConfiguration" // spring-boot-starter-shiro-biz
-})
 /** Configuration for Shiro Jwt Web authentication filter chain.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @ConditionalOnProperty(prefix = ShiroJwtProperties.PREFIX, value = "enabled", havingValue = "true")
-@EnableConfigurationProperties({ ShiroBizProperties.class, ShiroJwtProperties.class })
-public class ShiroJwtWebFilterConfiguration extends AbstractShiroWebFilterConfiguration {
-	
-	@Autowired
-	private ShiroBizProperties bizProperties;
+@EnableConfigurationProperties({ ShiroJwtProperties.class })
+public class ShiroJwtWebFilterConfiguration {
 
-	@Bean
-    @ConditionalOnMissingBean
-    @Override
-    protected ShiroFilterFactoryBean shiroFilterFactoryBean() {
+	@Bean("jwtAuthcFilter")
+	@ConditionalOnMissingBean(name = "jwtAuthcFilter")
+	public FilterRegistrationBean<JwtAuthenticatingFilter> jwtAuthcFilterRegistrationBean(
+			JwtPayloadRepository jwtPayloadRepository,
+			JwtAuthenticationSuccessHandler successHandler,
+			JwtAuthenticationFailureHandler failureHandler,
+			ShiroJwtProperties jwtProperties) {
 
-		ShiroFilterProxyFactoryBean filterFactoryBean = new ShiroBizFilterFactoryBean();
-		filterFactoryBean.setStaticSecurityManagerEnabled(bizProperties.isStaticSecurityManagerEnabled());
-		
-		//系统主页：登录成功后跳转路径
-        filterFactoryBean.setSuccessUrl(bizProperties.getSuccessUrl());
-        //异常页面：无权限时的跳转路径
-        filterFactoryBean.setUnauthorizedUrl(bizProperties.getUnauthorizedUrl());
-        
-        //必须设置 SecurityManager
-   		filterFactoryBean.setSecurityManager(securityManager);
-   		//拦截规则
-        filterFactoryBean.setFilterChainDefinitionMap(shiroFilterChainDefinition.getFilterChainMap());
-        
-        return filterFactoryBean;
-        
-    }
+		JwtAuthenticatingFilter filter = new JwtAuthenticatingFilter();
+		filter.setJwtPayloadRepository(jwtPayloadRepository);
+		filter.setSuccessHandler(successHandler);
+		filter.setFailureHandler(failureHandler);
+		filter.setCheckExpiry(jwtProperties.isCheckExpiry());
 
-    @Bean(name = "filterShiroFilterRegistrationBean")
-    @ConditionalOnMissingBean
-    protected FilterRegistrationBean<AbstractShiroFilter> filterShiroFilterRegistrationBean() throws Exception {
+		FilterRegistrationBean<JwtAuthenticatingFilter> registration = new FilterRegistrationBean<>();
+		registration.setFilter(filter);
+		registration.setOrder(Integer.MAX_VALUE - 1);
+		return registration;
+	}
 
-        FilterRegistrationBean<AbstractShiroFilter> filterRegistrationBean = new FilterRegistrationBean<AbstractShiroFilter>();
-        filterRegistrationBean.setFilter((AbstractShiroFilter) shiroFilterFactoryBean().getObject());
-        filterRegistrationBean.setOrder(Integer.MAX_VALUE);
+	@Bean("jwtAuthzFilter")
+	@ConditionalOnMissingBean(name = "jwtAuthzFilter")
+	public FilterRegistrationBean<JwtAuthorizationFilter> jwtAuthzFilterRegistrationBean(
+			JwtPayloadRepository jwtPayloadRepository,
+			ShiroJwtProperties jwtProperties) {
 
-        return filterRegistrationBean;
-    }
-    
+		JwtAuthorizationFilter filter = new JwtAuthorizationFilter();
+		filter.setJwtPayloadRepository(jwtPayloadRepository);
+		filter.setCheckExpiry(jwtProperties.isCheckExpiry());
+
+		FilterRegistrationBean<JwtAuthorizationFilter> registration = new FilterRegistrationBean<>();
+		registration.setFilter(filter);
+		registration.setOrder(Integer.MAX_VALUE);
+		return registration;
+	}
+
 }

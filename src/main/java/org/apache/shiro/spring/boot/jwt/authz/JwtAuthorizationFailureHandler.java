@@ -20,15 +20,14 @@ import java.nio.charset.StandardCharsets;
 
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson2.JSON;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.biz.authc.AuthcResponse;
 import org.apache.shiro.biz.authc.AuthcResponseCode;
-import org.apache.shiro.biz.authz.AuthorizationFailureHandler;
 import org.apache.shiro.biz.utils.SubjectUtils;
-import org.apache.shiro.biz.utils.WebUtils;
 import org.apache.shiro.biz.web.servlet.http.HttpStatus;
 import org.apache.shiro.spring.boot.jwt.ShiroJwtMessageSource;
 import org.apache.shiro.spring.boot.jwt.authc.JwtAuthenticationFailureHandler;
@@ -39,20 +38,20 @@ import org.apache.shiro.spring.boot.jwt.exception.NotObtainedJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.core.Ordered;
 import org.springframework.http.MediaType;
 
 import com.alibaba.fastjson2.JSONObject;
 
 /**
- * TODO
- * @author [@Loong Wan](https://github.com/loong10k)
+ * Authorization failure handler for JWT.
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
-public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandler {
+public class JwtAuthorizationFailureHandler implements Ordered {
 
 	protected MessageSourceAccessor messages = ShiroJwtMessageSource.getAccessor();
 	private static final Logger LOG = LoggerFactory.getLogger(JwtAuthenticationFailureHandler.class);
-	
-	@Override
+
 	/** Indicates whether this provider supports the given authentication class.
 	 * @param ex the ex
 	 * @return the result
@@ -62,17 +61,17 @@ public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandl
 				IncorrectJwtException.class, InvalidJwtToken.class, NotObtainedJwtException.class);
 	}
 
-	@Override
 	public boolean onAuthorizationFailure(Object mappedValue, AuthenticationException ex, ServletRequest request,
 			ServletResponse response) throws IOException {
-		
+
 		if(LOG.isDebugEnabled()) {
 			LOG.debug(ExceptionUtils.getRootCauseMessage(ex));
 		}
-		
+
 		try {
-			
-			WebUtils.toHttp(response).setStatus(HttpStatus.SC_OK);
+
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.setStatus(HttpStatus.SC_OK);
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
@@ -80,12 +79,12 @@ public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandl
 			if (ex instanceof ExpiredJwtException) {
 				JSON.writeTo(response.getOutputStream(), AuthcResponse.error(AuthcResponseCode.SC_AUTHZ_TOKEN_EXPIRED.getCode(),
 						messages.getMessage(AuthcResponseCode.SC_AUTHZ_TOKEN_EXPIRED.getMsgKey(), ex.getMessage())));
-			} 
+			}
 			// Jwt错误
 			else if (ex instanceof IncorrectJwtException) {
 				JSON.writeTo(response.getOutputStream(), AuthcResponse.error(AuthcResponseCode.SC_AUTHZ_TOKEN_INCORRECT.getCode(),
 						messages.getMessage(AuthcResponseCode.SC_AUTHZ_TOKEN_INCORRECT.getMsgKey(), ex.getMessage())));
-			} 
+			}
 			// Jwt无效
 			else if (ex instanceof InvalidJwtToken) {
 				JSON.writeTo(response.getOutputStream(), AuthcResponse.error(AuthcResponseCode.SC_AUTHZ_TOKEN_INVALID.getCode(),
@@ -103,10 +102,10 @@ public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandl
 			LOG.error(e.getMessage());
 			JSON.writeTo(response.getOutputStream(), AuthcResponse.error("Unauthentication."));
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	/** Returns the order.
 	 * @return the result
@@ -114,5 +113,5 @@ public class JwtAuthorizationFailureHandler implements AuthorizationFailureHandl
 	public int getOrder() {
 		return Integer.MAX_VALUE - 1;
 	}
-	
+
 }

@@ -3,7 +3,7 @@ package org.apache.shiro.spring.boot.jwt.exception;
 import org.apache.shiro.authc.AuthenticationException;
 /** The Invalid Jwt Token.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 

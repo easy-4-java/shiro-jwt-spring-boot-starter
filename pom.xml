@@ -485,7 +485,7 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
-        <spring-boot-starter-shiro-biz.version>4.1.x.20260630-SNAPSHOT</spring-boot-starter-shiro-biz.version>
+        <shiro-biz.version>3.0.x.20260630-SNAPSHOT</shiro-biz.version>
                 <slf4j.version>2.0.18</slf4j.version>
     </properties>
 
@@ -547,6 +547,12 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
+        <!-- For Spring Web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
         
         <!-- For Fastjson2 -->
         <dependency>
@@ -575,11 +581,18 @@
             <scope>provided</scope>
         </dependency>
         
-        <!-- Source: https://github.com/easy-4-java/shiro-biz-spring-boot-starter — easy4j shiro-biz-spring-boot-starter -->
+        <!-- Source: https://github.com/easy-4-java/shiro-biz — easy4j shiro-biz -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>shiro-biz-spring-boot-starter</artifactId>
-            <version>${spring-boot-starter-shiro-biz.version}</version>
+            <artifactId>shiro-biz</artifactId>
+            <version>${shiro-biz.version}</version>
+        </dependency>
+
+        <!-- For Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
     </dependencies>
