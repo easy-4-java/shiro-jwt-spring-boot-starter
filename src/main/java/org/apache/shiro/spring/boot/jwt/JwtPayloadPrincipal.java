@@ -21,7 +21,7 @@ import io.github.easy4j.jwt.JwtPayload;
 
 /**
  * TODO
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @SuppressWarnings("serial")
 public class JwtPayloadPrincipal extends ShiroPrincipal {
