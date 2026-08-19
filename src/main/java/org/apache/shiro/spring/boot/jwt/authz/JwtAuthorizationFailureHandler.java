@@ -46,6 +46,7 @@ import com.alibaba.fastjson2.JSONObject;
 /**
  * Authorization failure handler for JWT.
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtAuthorizationFailureHandler implements Ordered {
 

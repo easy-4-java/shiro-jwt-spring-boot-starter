@@ -18,6 +18,7 @@ import com.google.common.collect.Sets;
 /**
  * JSON Web Token (JWT) Stateless AuthorizingRealm
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtStatelessAuthorizingRealm extends AbstractAuthorizingRealm {
 

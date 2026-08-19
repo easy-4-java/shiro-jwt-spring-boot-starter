@@ -33,14 +33,33 @@ public final class StringUtils {
 		// utility class
 	}
 
+	/**
+	 * is Empty.
+	 *
+	 * @param o the o
+	 * @return the result
+	 */
 	public static boolean isEmpty(Object o) {
 		return o == null || "".equals(o);
 	}
 
+	/**
+	 * tokenize To String Array.
+	 *
+	 * @param str the str
+	 * @return the result
+	 */
 	public static String[] tokenizeToStringArray(String str) {
 		return tokenizeToStringArray(str, CONFIG_LOCATION_DELIMITERS);
 	}
 
+	/**
+	 * tokenize To String Array.
+	 *
+	 * @param str the str
+	 * @param delimiters the delimiters
+	 * @return the result
+	 */
 	public static String[] tokenizeToStringArray(String str, String delimiters) {
 		if (str == null) {
 			return new String[0];

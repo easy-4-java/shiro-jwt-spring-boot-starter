@@ -24,6 +24,14 @@ import com.alibaba.fastjson2.JSONObject;
 
 public class JSONResult{
 	
+    /**
+     * fill Result String.
+     *
+     * @param status the status
+     * @param message the message
+     * @param result the result
+     * @return the result
+     */
     public static String fillResultString(Integer status, String message, Object result){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("status", status);

@@ -23,10 +23,19 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 
 /**
  * JSON Web Token (JWT) Credentials Matcher
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtCredentialsMatcher implements CredentialsMatcher {
 	
 	@Override
+	/**
+	 * do Credentials Match.
+	 *
+	 * @param token the token
+	 * @param info the info
+	 * @return the result
+	 */
 	public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
 		String jwt = (String) info.getCredentials();
 		/*

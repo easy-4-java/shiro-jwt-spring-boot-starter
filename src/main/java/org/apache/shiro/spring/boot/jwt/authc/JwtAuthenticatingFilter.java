@@ -50,6 +50,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Jwtauthentication (authentication)filter
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtAuthenticatingFilter implements Filter {
 
@@ -72,11 +73,24 @@ public class JwtAuthenticatingFilter implements Filter {
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
+	/**
+	 * init.
+	 *
+	 * @param filterConfig the filter config
+	 * @throws ServletException if an error occurs
+	 */
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// no-op
 	}
 
 	@Override
+	/**
+	 * do Filter.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param filterChain the filter chain
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 
@@ -118,6 +132,10 @@ public class JwtAuthenticatingFilter implements Filter {
 	}
 
 	@Override
+	/**
+	 * destroy.
+	 *
+	 */
 	public void destroy() {
 		// no-op
 	}

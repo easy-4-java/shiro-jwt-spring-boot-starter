@@ -36,6 +36,7 @@ import com.alibaba.fastjson2.JSONObject;
  * Jwtauthorization (authorization)filter
  *
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtAuthorizationFilter implements Filter {
 
@@ -57,11 +58,24 @@ public class JwtAuthorizationFilter implements Filter {
 	private boolean checkExpiry = false;
 
 	@Override
+	/**
+	 * init.
+	 *
+	 * @param filterConfig the filter config
+	 * @throws ServletException if an error occurs
+	 */
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// no-op
 	}
 
 	@Override
+	/**
+	 * do Filter.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @param filterChain the filter chain
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws IOException, ServletException {
 
@@ -113,6 +127,10 @@ public class JwtAuthorizationFilter implements Filter {
 	}
 
 	@Override
+	/**
+	 * destroy.
+	 *
+	 */
 	public void destroy() {
 		// no-op
 	}

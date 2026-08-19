@@ -23,6 +23,8 @@ import org.apache.shiro.subject.SubjectContext;
 
 /**
  * StatelessDefaultSubjectFactory, JSON Web Token (JWT)session
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtSubjectFactory extends SessionCreationEnabledSubjectFactory {
 
@@ -31,6 +33,12 @@ public class JwtSubjectFactory extends SessionCreationEnabledSubjectFactory {
 	}
 
 	 @Override
+	    /**
+	     * create Subject.
+	     *
+	     * @param context the context
+	     * @return the result
+	     */
 	    public Subject createSubject(SubjectContext context) {
 
 	        boolean authenticated = context.isAuthenticated();

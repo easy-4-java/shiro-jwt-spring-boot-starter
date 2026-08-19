@@ -7,6 +7,7 @@ import org.apache.shiro.spring.boot.jwt.token.JwtAuthorizationToken;
 /**
  * JSON Web Token (JWT) Stateful AuthorizingRealm
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
  */
 public class JwtStatefulAuthorizingRealm extends AbstractAuthorizingRealm {
 
