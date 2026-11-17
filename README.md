@@ -14,8 +14,8 @@
 
 [Positioning](#1-positioning) · [Capabilities](#2-core-capabilities) ·
 [Dependency](#5-dependency) · [Quick Start](#6-quick-start) ·
-[Configuration](#7-configuration-reference) · [Versions](#9-version-lines-and-compatibility) ·
-[Build](#10-build-and-test) · [License](#12-license)
+[Configuration](#7-configuration-reference) · [Versions](#8-version-lines-and-compatibility) ·
+[Build](#9-build-and-test) · [License](#12-license)
 
 </div>
 
